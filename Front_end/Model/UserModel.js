@@ -3,20 +3,20 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     name: {
-        type: String,
-        required: true
+        type: String, //data type
+        required: true //validation
     },
     gmail: {
-        type: String,
-        required: true
+        type: String, //data type
+        required: true //validation
     },
     age: {
-        type: Number,
-        required: true
+        type: Number, //data type
+        required: true //validation
     },
     address: {
-        type: String,
-        required: true
+        type: String, //data type
+        required: true //validation
     }
 
 }); 
