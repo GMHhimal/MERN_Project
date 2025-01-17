@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router";
 import "./App.css";
 import Home from "./Components/Home/Home";
-import AddUser from "./Components/Add user/AddUser";
+import AddUser from "./Components/AddUser/AddUser";
 import Users from "./Components/UserDetails/Users";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
           <Route path="/userdetails" element={<Users />} />
         </Routes>
       </React.Fragment>
-    </div>
+    </div> 
   );
 }
 

@@ -13,7 +13,7 @@ function Nav() {
         </li>
         <li className="home-l">
         <Link to="/adduser" className="active home-a">
-          <h1>ADD user</h1>
+          <h1>Add User</h1>
           </Link>
         </li>
         <li className="home-l">
