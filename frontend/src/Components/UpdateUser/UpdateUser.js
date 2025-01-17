@@ -1,46 +1,52 @@
-import React, { useState } from 'react';
-import Nav from "../Nav/nav";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router";
+import { useNavigate } from "react-router";
 
-function AddUser() {
+function UpdateUser() {
+  const [inputs, setInputs] = useState({});
   const history = useNavigate();
-  const [inputs, setInputs] = useState({
-    name: "",
-    gmail: "",
-    age: "",
-    address: "",
-  });
+  const id = useParams().id;
+
+  useEffect(() => {
+    const fetchHandler = async () => {
+      await axios
+        .get(`http://localhost:5000/users/${id}`)
+        .then((res) => res.data)
+        .then((data) => setInputs(data.user));
+    };
+    fetchHandler();
+  }, [id]);
+
+  const sendRequest = async () => {
+    await axios
+      .put(`http://localhost:5000/users/${id}`, {
+        name: String(inputs.name),
+        gmail: String(inputs.gmail),
+        age: Number(inputs.age),
+        address: String(inputs.address),
+      })
+      .then((res) => res.data);
+  };
 
   const handleChange = (e) => {
     setInputs((prevState) => ({
-        ...prevState,
-        [e.target.name]: e.target.value,
+      ...prevState,
+      [e.target.name]: e.target.value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(inputs);
-    await sendRequest();
-    history("/userdetails");
+    sendRequest().then(() =>
+       history("/userdetails"));
   };
 
-  const sendRequest = async () => {
-    await axios.post("http://localhost:5000/users",{
-        name: String (inputs.name),
-        gmail: String (inputs.gmail),
-        age: Number (inputs.age),
-        address: String (inputs.address),
-
-    }).then(res => res.data);
-  }
-
   return (
-    <div>
-      <Nav />
-      <h1>Add User</h1>
-      <form onSubmit={handleSubmit}>
+  <div>
+    <h1>Update User</h1>
+    <form onSubmit={handleSubmit}>
         <label>Name</label>
         <br />
         <input type="text" name="name" onChange={handleChange} value={inputs.name} required></input>
@@ -63,8 +69,8 @@ function AddUser() {
         <br></br>
         <button>Submit</button>
       </form>
-    </div>
+  </div>
   );
 }
 
-export default AddUser;
+export default UpdateUser;
