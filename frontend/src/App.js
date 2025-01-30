@@ -4,6 +4,7 @@ import "./App.css";
 import Home from "./Components/Home/Home";
 import AddUser from "./Components/AddUser/AddUser";
 import Users from "./Components/UserDetails/Users";
+import Register from "./Components/Register/Register";
 import UpdateUsers from "./Components/UpdateUser/UpdateUser";
 
 function App() {
@@ -15,7 +16,9 @@ function App() {
           <Route path="/mainhome" element={<Home />} />
           <Route path="/adduser" element={<AddUser />} />
           <Route path="/userdetails" element={<Users />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/userdetails/:id" element={<UpdateUsers />} />
+
 
         </Routes>
       </React.Fragment>

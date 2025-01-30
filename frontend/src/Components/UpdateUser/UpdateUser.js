@@ -44,7 +44,7 @@ function UpdateUser() {
   };
 
   return (
-  <div>
+  <div >
     <h1>Update User</h1>
     <form onSubmit={handleSubmit}>
         <label>Name</label>
