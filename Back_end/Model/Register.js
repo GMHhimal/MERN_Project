@@ -11,7 +11,7 @@ const regiSchema = new Schema({
         required: true //validation
     },
     password: {
-        type: Number, //data type
+        type: String, //data type
         required: true //validation
     }
 
