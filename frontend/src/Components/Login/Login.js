@@ -3,7 +3,7 @@ import Nav from "../Nav/nav";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Register() {
+function Login() {
   const history = useNavigate();
   const [user, setUser] = useState({
     name: "",
@@ -14,24 +14,25 @@ function Register() {
     const { name, value } = e.target;
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    sendRequest()
-      .then(() => {
-        alert("User Register Successfully");
+    try {
+      const response = await sendRequest();
+      if (response.status === "ok") {
+        alert("User Login Successfully");
         history("/userdetails");
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+      } else {
+        alert("Login error");
+      }
+    } catch (err) {
+      alert("error" + err.message);
+    }
   };
   const sendRequest = async () => {
-    await axios
-      .post("http://localhost:5000/register", {
-        name: String(user.name),
-        gmail: String(user.gmail),
-        password: String(user.password),
+    return await axios
+      .post("http://localhost:5000/login", {
+        gmail: user.gmail,
+        password: user.password,
       })
       .then((res) => res.data);
   };
@@ -39,20 +40,10 @@ function Register() {
   return (
     <div>
       <Nav />
-      <h1>User Register</h1>
+      <h1>User Login</h1>
       <form onSubmit={handleSubmit}>
-        <label>Name</label>
-        <br />
-        <input
-          type="text"
-          value={user.name}
-          onChange={handleInputChange}
-          name="name"
-          placeholder="Enter your name"
-        />
-        <br />
-        <br />
         <label>Gmail</label>
+        <br />
         <br />
         <input
           type="email"
@@ -60,6 +51,7 @@ function Register() {
           onChange={handleInputChange}
           name="gmail"
           placeholder="Enter your email"
+          required
         />
         <br />
         <br />
@@ -71,13 +63,15 @@ function Register() {
           onChange={handleInputChange}
           name="password"
           placeholder="Enter your password"
+          required
+          
         />
         <br />
         <br />
-        <button>Register</button>
+        <button>Login</button>
       </form>
     </div>
   );
 }
 
-export default Register;
+export default Login;

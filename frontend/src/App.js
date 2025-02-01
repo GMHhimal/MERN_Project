@@ -6,6 +6,7 @@ import AddUser from "./Components/AddUser/AddUser";
 import Users from "./Components/UserDetails/Users";
 import Register from "./Components/Register/Register";
 import UpdateUsers from "./Components/UpdateUser/UpdateUser";
+import Login from "./Components/Login/Login";
 
 function App() {
   return (
@@ -17,7 +18,9 @@ function App() {
           <Route path="/adduser" element={<AddUser />} />
           <Route path="/userdetails" element={<Users />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/userdetails/:id" element={<UpdateUsers />} />
+          
 
 
         </Routes>
