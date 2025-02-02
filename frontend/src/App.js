@@ -20,12 +20,9 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/userdetails/:id" element={<UpdateUsers />} />
-          
-
-
         </Routes>
       </React.Fragment>
-    </div> 
+    </div>
   );
 }
 
